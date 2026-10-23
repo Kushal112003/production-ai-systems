@@ -12,3 +12,8 @@ def test_health_ok():
     body = r.json()
     assert body["status"] == "ok"
     assert "version" in body
+
+def test_version_ok():
+    r = client.get("/version")
+    assert r.status_code == 200
+    assert r.json() == {"version": "0.1.0"}
