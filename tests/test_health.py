@@ -1,0 +1,14 @@
+"""Smoke tests — the first proof. Every push must keep these green."""
+from fastapi.testclient import TestClient
+
+from rag_service.main import app
+
+client = TestClient(app)
+
+
+def test_health_ok():
+    r = client.get("/health")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["status"] == "ok"
+    assert "version" in body
